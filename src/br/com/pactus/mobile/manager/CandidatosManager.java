@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -31,7 +32,7 @@ public class CandidatosManager implements Serializable{
 
    public String candidatoEdicao(){
       candidatoEdicao = new Candidato("edicao", "edicao", true);
-      return "Votacao?faces-redirect=true";
+      return "votacao?faces-redirect=true";
    }
 
    public void novoCandidatoDialog(){
@@ -40,7 +41,7 @@ public class CandidatosManager implements Serializable{
 
    public String novoCandidato(){
       candidatoEdicao = new Candidato("", "", true);
-      return "Votacao?faces-redirect=true";
+      return "votacao?faces-redirect=true";
    }
 
    public void salvar(){
@@ -48,10 +49,15 @@ public class CandidatosManager implements Serializable{
          candidatos.add(candidatoEdicao);
       }
       candidatoEdicao = new Candidato("", "", true);
-
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Candidato salvo com sucesso!"));
+      
+      this.criaMensagem("Candidato salvo com sucesso!", FacesMessage.SEVERITY_INFO);
    }
 
+   
+   private void criaMensagem(String mensagem, Severity severity) {
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, mensagem, ""));
+   }
+   
    public List<Candidato> getClientes(){
       return candidatos;
    }

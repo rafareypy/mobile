@@ -10,7 +10,8 @@
 		<h1 class="aw-page-title">Votação</h1>
 		
 		<h:form id="frm">
-			<p:messages autoUpdate="false"/>
+			<p:messages autoUpdate="false" />
+
 			<div class="ui-fluid" >
 				<p:tabView style="magin-top: 10px" id="tabView" >
 					<p:tab title="Avalição">
@@ -19,12 +20,12 @@
 								styleClass="panelgrid-noborder">
 								
 									<p:outputLabel value="Codigo" for="codigo" />
-									<p:inputMask id="codigo" required="true" 
+									<p:inputMask id="codigo" required="true" requiredMessage="Codigo é obrigatório"
 								value="#{candidatosManager.candidatoEdicao.codigo}"
 								style="width: 70%" />
 								
 							<p:outputLabel value="Nome" for="nome" />
-							<p:inputText id="nome" required="true" 
+							<p:inputText id="nome" required="true" requiredMessage="Nome é obrigatório"
 								value="#{candidatosManager.candidatoEdicao.nome}" />
 								
 								
@@ -36,14 +37,19 @@
 			<p:toolbar>
 				<p:toolbarGroup>
 					<p:commandButton value="Salvar" action="#{candidatosManager.salvar}" 
-										update=":mensagens @form"/>					
+									process="tabView @this" update="@form" />					
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right" >
-					<p:commandButton value="Novo" action="#{candidatosManager.novoCandidato}" />
+					<p:commandButton value="Novo" action="#{candidatosManager.novoCandidato}"
+						process="@this" update="@form" />
+						
 					<p:commandButton value="Pesquisa" action="#{candidatosManager.novoCandidato}" />
 				</p:toolbarGroup>
 			</p:toolbar>
+			
+					
 			</h:form>
+						
    		</ui:define>
    	</ui:composition>
 </html>

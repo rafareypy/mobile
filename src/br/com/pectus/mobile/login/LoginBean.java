@@ -31,6 +31,7 @@ public class LoginBean {
 		
 		if(usuarioEncontrado!= null && possuiMesmaSenha(usuarioEncontrado)) {
 			usuarioLogado.logar(usuarioEncontrado);
+			criaMensagem("Usuario logado!");
 			return menu.paginaLivros();
 		}
 		

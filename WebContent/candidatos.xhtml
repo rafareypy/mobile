@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+	<ui:composition template="layout.xhtml">
+	<ui:define name="corpo">
+		<h1 class="aw-page-title">Candidatos</h1>
+
+		<h:form id="form">
+
+			<p:toolbar>
+				<p:toolbarGroup align="right">
+					<p:commandButton value="Votacao Rapida" style="width: auto"
+						oncomplete="PF('novoCandidatoDialog').show()"
+						action="#{candidatosManager.novoCandidatoDialog}"
+						process="@this" >
+						<p:resetInput target="frm:novoCandidatoDialog" />
+					</p:commandButton>
+				
+				
+					<p:commandButton value="Novo Candidato" 
+						action="#{candidatosManager.novoCandidato}"  
+						process="@this"
+						/>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+
+			<p:dataTable value="#{candidatosManager.candidatos}" var="candidato"
+				selectionMode="single" selection="#{candidatosManager.candidatoEdicao}"
+				rowKey="#{candidato.codigo}" style="margin-top: 20px">
+				<p:column headerText="Codigo">
+					<h:outputText value="#{candidato.codigo}" />
+				</p:column>
+				<p:column headerText="Nome" priority="3">
+					<h:outputText value="#{candidato.nome}" />
+				</p:column>
+				<p:column headerText="Like" priority="6">
+					<h:outputText value="#{candidato.like}" />
+				</p:column>
+
+				<f:facet name="footer">
+					<p:commandButton icon="ui-icon-pencil" value="Editar" 
+						action="votacao?faces-redirect=true"
+					/>
+				</f:facet>
+			</p:dataTable>
+
+			<p:dialog widgetVar="novoCandidatoDialog" id="novoCandidatoDialog"
+				header="Novo Candidato" resizable="false" responsive="true">
+				
+				<h:panelGroup id="novoCandidatoPanel" layout="block" styleClass="ui-fluid">
+					<p:messages autoUpdate="false" />
+				
+					<p:panelGrid columns="2" layout="grid" styleClass="panelgrid-noborder"
+							columnClasses="ui-grid-col-4, ui-grid-col-8">
+						<p:outputLabel value="Nome" for="nome" />
+						<p:inputText id="nome" required="true"
+							value="#{candidatosManager.candidatoEdicao.nome}" />
+						
+						<p:outputLabel value="Codigo" for="codigo" />
+						<p:inputText id="codigo" required="true"
+							value="#{candidatosManager.candidatoEdicao.codigo}" />
+						
+						
+						<p:outputLabel/>
+						<p:commandButton value="Adicionar" process="novoCandidatoDialog"								
+								oncomplete="if (!args.validationFailed) PF('novoCandidatoDialog').hide()">
+							<p:collector value="#{candidatosManager.candidatoEdicao}"
+								addTo="#{candidatosManager.candidatos}" />
+						</p:commandButton>
+					</p:panelGrid>
+				</h:panelGroup>
+				
+				
+			</p:dialog>
+
+
+		</h:form>
+
+
+	</ui:define>
+
+   	</ui:composition>
+</html>
