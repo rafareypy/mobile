@@ -9,14 +9,41 @@
    		<ui:define name="corpo">
 		<h1 class="aw-page-title">Votação</h1>
 		
-		<h:form id="frm"></h:form>
+		<h:form id="frm">
 			<p:messages autoUpdate="false"/>
 			<div class="ui-fluid" >
 				<p:tabView style="magin-top: 10px" id="tabView" >
 					<p:tab title="Avalição">
+						<p:panelGrid columns="4" layout="grid" 
+								columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4"
+								styleClass="panelgrid-noborder">
+								
+									<p:outputLabel value="Codigo" for="codigo" />
+									<p:inputMask id="codigo" required="true" 
+								value="#{candidatosManager.candidatoEdicao.codigo}"
+								style="width: 70%" />
+								
+							<p:outputLabel value="Nome" for="nome" />
+							<p:inputText id="nome" required="true" 
+								value="#{candidatosManager.candidatoEdicao.nome}" />
+								
+								
+						</p:panelGrid>
 					</p:tab>
 				</p:tabView>			
 			</div>
+			
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Salvar" action="#{candidatosManager.salvar}" 
+										update=":mensagens @form"/>					
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right" >
+					<p:commandButton value="Novo" action="#{candidatosManager.novoCandidato}" />
+					<p:commandButton value="Pesquisa" action="#{candidatosManager.novoCandidato}" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			</h:form>
    		</ui:define>
    	</ui:composition>
 </html>
