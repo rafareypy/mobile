@@ -13,7 +13,7 @@
 	
 	<lifecycle>
 		<phase-listener>
-			br.com.caelum.livraria.login.Autorizador 
+			br.com.pectus.mobile.login.Autorizador 
 		</phase-listener>
 	</lifecycle>
 

@@ -1,4 +1,4 @@
-package br.com.caelum.livraria.login;
+package br.com.pectus.mobile.login;
 
 import java.io.Serializable;
 

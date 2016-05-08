@@ -1,4 +1,4 @@
-package br.com.caelum.livraria.login;
+package br.com.pectus.mobile.login;
 
 import javax.enterprise.inject.Model;
 import javax.faces.application.FacesMessage;
