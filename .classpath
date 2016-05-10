@@ -3,6 +3,10 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/bootstrap-1.0.10.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/primefaces-5.3.jar"/>
+	<classpathentry kind="lib" path="/pectus-application/lib/commons-core.jar"/>
+	<classpathentry kind="lib" path="/pectus-application/lib/commons-persistence.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/pectus-business"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/pectus-common"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>

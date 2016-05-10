@@ -6,14 +6,27 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import br.com.caelum.livraria.bean.MenuBean;
-import br.com.caelum.livraria.dao.UsuarioDao;
-import br.com.caelum.livraria.modelo.Usuario;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+import javax.commons.core.common.SystemContext;
+import javax.commons.core.tool.NetInfo;
+import javax.commons.core.tool.SystemInfo;
+import javax.commons.core.util.ObjUtils;
+
+import br.com.mediastinum.pectus.business.common.constant.BusinessMessages;
+import br.com.mediastinum.pectus.business.common.entity.Usuario;
+import br.com.mediastinum.pectus.business.common.session.bean.AccessControlBean;
+import br.com.mediastinum.pectus.business.common.session.facade.SessionManager;
+import br.com.mediastinum.pectus.business.common.session.service.AccessControlService;
+import br.com.mediastinum.pectus.business.model.entity.Parametro;
+
 
 @Model
 public class LoginBean {
 	
-	private Usuario usuario = new Usuario();
-	private UsuarioDao dao = new UsuarioDao();
+	private Usuario usuarioEncontrado = new Usuario();	
 	
 	@Inject
 	UsuarioLogadoBean usuarioLogado;
@@ -22,20 +35,18 @@ public class LoginBean {
 	MenuBean menu;
 
 	public Usuario getUsuario() {
-		return usuario;
+		return usuarioEncontrado;
 	}
 	
 	public String efetuaLogin() {
-		
-		Usuario usuarioEncontrado = this.dao.buscaPeloLogin(usuario.getLogin());
-		
-		if(usuarioEncontrado!= null && possuiMesmaSenha(usuarioEncontrado)) {
+
+	   this.usuarioEncontrado = ((AccessControlService) SessionManager.service(AccessControlBean.class)).isValidConnection(usuarioEncontrado);
+      if (!usuarioEncontrado.hasErrors()){
 			usuarioLogado.logar(usuarioEncontrado);
 			criaMensagem("Usuario logado!");
-			return menu.paginaLivros();
-		}
-		
-		criaMensagem("Usu√°rio n√£o encontrado!");
+			return menu.paginaAvaliacao();
+      }
+		criaMensagem("Usu·rio n„o encontrado!");
 		limparForm();
 		
 		return "";
@@ -48,14 +59,12 @@ public class LoginBean {
 
 	
 	private void limparForm() {
-		this.usuario = new Usuario();
+		this.usuarioEncontrado = new Usuario();
 	}
 
 	private void criaMensagem(String mensagem) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, mensagem, ""));
 	}
 
-	private boolean possuiMesmaSenha(Usuario usuarioEncontrado) {
-		return usuarioEncontrado.getSenha().equals(usuario.getSenha());
-	}
+
 }

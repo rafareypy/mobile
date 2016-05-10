@@ -20,7 +20,7 @@ public class MenuBean implements Serializable{
 		this.index = index;
 	}
 	
-	public String paginaLivros() {
+	public String paginaAvaliacao() {
 		this.index = 0;
 		return "avaliacao?faces-redirect=true";
 	}

@@ -5,7 +5,8 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import br.com.caelum.livraria.modelo.Usuario;
+import br.com.mediastinum.pectus.business.common.entity.Usuario;
+
 
 @Named 
 @SessionScoped

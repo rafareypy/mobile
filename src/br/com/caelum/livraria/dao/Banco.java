@@ -5,13 +5,12 @@ import java.util.List;
 
 import br.com.caelum.livraria.modelo.Autor;
 import br.com.caelum.livraria.modelo.Livro;
-import br.com.caelum.livraria.modelo.Usuario;
 
 public class Banco {
 	
 	public static List<Livro> livros = new ArrayList<Livro>();
 	public static List<Autor> autores = new ArrayList<Autor>();
-	public static List<Usuario> usuarios = new ArrayList<Usuario>();
+	
 	
 	private static int chave = 1;
 	
@@ -47,16 +46,6 @@ public class Banco {
 		return null;
 	}
 	
-	public Usuario buscaPeloNome(String nome) {
-		for (Usuario usuario : usuarios) {
-			if(usuario.getLogin().equals(nome)) {
-				return usuario;
-			}
-		}
-		
-		return null;
-	}
-	
 	private static void inicializaBanco() {
 		Autor silveira = new Autor(chave++, "Paulo Silveira");
 		Autor cordeiro = new Autor(chave++, "Gilliard Cordeiro");
@@ -75,7 +64,6 @@ public class Banco {
 		livros.add(new Livro("JPA Efficaz",coelho));
 		livros.add(new Livro("JSF Efficaz",coelho));
 		
-		usuarios.add(new Usuario("admin", "admin"));
 	}
 
 }

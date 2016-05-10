@@ -10,13 +10,13 @@
 			<h:form id="f" style="width: 40%;  margin: 0 auto;" >
 				<p:panelGrid columns="2">
 				
-				 	<f:facet name="header">Login__:</f:facet>
+				 	<f:facet name="header">Login:</f:facet>
 				
 					<p:outputLabel value="Login: "/>
-					<p:inputText value="#{loginBean.usuario.login}" required="true" id="login" />
+					<p:inputText value="#{loginBean.usuario.usuNome}" required="true" id="login" />
 						
 					<p:outputLabel value="Senha: " />
-					<h:inputSecret value="#{loginBean.usuario.senha}" required="true" id="senha" />
+					<h:inputSecret value="#{loginBean.usuario.usuSenha}" required="true" id="senha" />
 
 				    <f:facet name="footer">  
 						<p:commandButton value="Logar" action="#{loginBean.efetuaLogin}" 
