@@ -29,17 +29,17 @@
 			</p:toolbar>
 
 
-			<p:dataTable value="#{candidatosManager.candidatos}" var="candidato"
-				selectionMode="single" selection="#{candidatosManager.candidatoEdicao}"
-				rowKey="#{candidato.codigo}" style="margin-top: 20px">
+			<p:dataTable value="#{candidatosManager.parceiros}" var="parceiro"
+				selectionMode="single" selection="#{candidatosManager.parceiroEdicao}"
+				rowKey="#{parceiro.parId}" style="margin-top: 20px">
 				<p:column headerText="Codigo">
-					<h:outputText value="#{candidato.codigo}" />
+					<h:outputText value="#{parceiro.parId}" />
 				</p:column>
 				<p:column headerText="Nome" priority="3">
-					<h:outputText value="#{candidato.nome}" />
+					<h:outputText value="#{parceiro.parNomeFantasia}" />
 				</p:column>
-				<p:column headerText="Like" priority="6">
-					<h:outputText value="#{candidato.like}" />
+				<p:column headerText="Responsavel" priority="6">
+					<h:outputText value="#{parceiro.parNomeRazaoSocial}" />
 				</p:column>
 
 				<f:facet name="footer">
