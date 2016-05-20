@@ -25,9 +25,7 @@
 								style="width: 70%" />
 								
 							<p:outputLabel value="Nome" for="nome" />
-							<p:inputText id="nome" required="true" requiredMessage="Nome é obrigatório"
-								value="#{candidatosManager.parceiroEdicao.parNomeRazaoSocial}" />
-								
+							<p:inputText id="nome" value="#{candidatosManager.parceiroEdicao.parNomeRazaoSocial}" />
 								
 						</p:panelGrid>
 					</p:tab>
@@ -35,16 +33,19 @@
 			</div>
 			
 			<p:toolbar>
-				<p:toolbarGroup>
-					<p:commandButton value="Salvar" action="#{candidatosManager.salvar}" 
-									process="tabView @this" update="@form" />					
-				</p:toolbarGroup>
+			
 				<p:toolbarGroup align="right" >
-					<p:commandButton value="Novo" action="#{candidatosManager.novoParceiro}"
-						process="@this" update="@form" />
+					<p:commandButton value="Buscar" action="#{candidatosManager.buscarParceiro}"
+						process="tabView  @this" update="@form" />
 						
 					<p:commandButton value="Pesquisa" action="#{candidatosManager.novoCandidato}" />
+				</p:toolbarGroup>			
+			
+				<p:toolbarGroup>
+					<p:commandButton value="Salvar" action="#{candidatosManager.salvar}" 
+									process="@this" update="@form" />					
 				</p:toolbarGroup>
+
 			</p:toolbar>
 			
 					

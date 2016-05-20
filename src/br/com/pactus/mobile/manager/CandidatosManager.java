@@ -5,14 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.commons.core.tool.Console;
+import javax.commons.core.util.ObjUtils;
 import javax.commons.persistence.PersistenceClause;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-
-import com.pectrus.model.Candidato;
 
 import br.com.mediastinum.pectus.business.common.session.facade.SessionManager;
 import br.com.mediastinum.pectus.business.model.entity.Parceiro;
@@ -27,7 +26,7 @@ public class CandidatosManager implements Serializable{
    public List<Parceiro> parceiros = new ArrayList<Parceiro>();
 
    public CandidatosManager(){
-      
+
       PersistenceClause clause = new PersistenceClause();
       clause.andEquals("camId", 24);
       Parceiro p = new Parceiro();
@@ -46,24 +45,32 @@ public class CandidatosManager implements Serializable{
    }
 
    public void avaliacaoDialog(){
-      
-   }
-   
-   public String novoParceiro(){
-      
-      parceiroEdicao = new Parceiro();
-      return "avaliacao?faces-redirect=true";
-      
-      
-//      Parceiro p = new Parceiro();
-//      p.setParId(parceiroEdicao.getParId());
-//      parceiroEdicao = SessionManager.search().findById(p).getResult();
 
    }
-   
+
+   public String buscarParceiro(){
+      Long codigo = parceiroEdicao.getParId();
+      Parceiro p = new Parceiro();
+      p.setParId(codigo);      
+      parceiroEdicao = SessionManager.search().findById(p).getResult();
+      
+      if(ObjUtils.isNull(parceiroEdicao)){
+         parceiroEdicao = new Parceiro();
+         this.criaMensagem("Não foram encontrados resultados para o codigo " +codigo+ ".", FacesMessage.SEVERITY_FATAL);
+      }
+      
+      return "avaliacao?faces-redirect=true";
+   }
+
+   public String novoParceiro(){
+
+      parceiroEdicao = new Parceiro();
+      return "avaliacao?faces-redirect=true";
+   }
+
    public void salvar(){
       Console.println(parceiroEdicao.getParNomeRazaoSocial());
-      this.criaMensagem("Candidato "+ parceiroEdicao.getParNomeRazaoSocial() +" salvo com sucesso!", FacesMessage.SEVERITY_INFO);
+      this.criaMensagem("Candidato " + parceiroEdicao.getParNomeRazaoSocial() + " salvo com sucesso!", FacesMessage.SEVERITY_INFO);
       parceiroEdicao = new Parceiro();
    }
 
@@ -71,8 +78,6 @@ public class CandidatosManager implements Serializable{
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, mensagem, ""));
    }
 
-   
-   
    public Parceiro getParceiroEdicao(){
       return parceiroEdicao;
    }

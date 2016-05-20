@@ -25,15 +25,15 @@ public class Autorizador implements PhaseListener{
 		UsuarioLogadoBean usuarioLogado = (UsuarioLogadoBean) elResolver.getValue(elContext, null, "usuarioLogadoBean");
 
 		// Usando o usuarioLogado que foi injetado
-		if (!usuarioLogado.isLogado()) {
-
-			NavigationHandler handler = context.getApplication()
-					.getNavigationHandler();
-			handler.handleNavigation(context, null, "login?faces-redirect=true");
-			
-			//efetua renderizacao da tela
-			context.renderResponse();
-		}
+//		if (!usuarioLogado.isLogado()) {
+//
+//			NavigationHandler handler = context.getApplication()
+//					.getNavigationHandler();
+//			handler.handleNavigation(context, null, "login?faces-redirect=true");
+//			
+//			//efetua renderizacao da tela
+//			context.renderResponse();
+//		}
 	}	
 
 	@Override
