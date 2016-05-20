@@ -38,7 +38,14 @@
 					<p:commandButton value="Buscar" action="#{candidatosManager.buscarParceiro}"
 						process="tabView  @this" update="@form" />
 						
-					<p:commandButton value="Pesquisa" action="#{candidatosManager.novoCandidato}" />
+					<p:commandButton 
+						value="Pesquisa" style="width: auto"
+						oncomplete="PF('listaCandidatosDialog').show()"
+						action="#{candidatosManager.listaCandidatosDialog}"
+						process="@this" >
+						<p:resetInput target="frm:listaCandidatosDialog" />
+					</p:commandButton>
+					
 				</p:toolbarGroup>			
 			
 				<p:toolbarGroup>
@@ -48,6 +55,12 @@
 
 			</p:toolbar>
 			
+			<p:dialog widgetVar="listaCandidatosDialog" id="listaCandidatosDialog" 
+					header="Busca Candidatos" resizable="false" responsive="true"  >
+					
+			 
+			</p:dialog>					
+					
 					
 			</h:form>
 						
