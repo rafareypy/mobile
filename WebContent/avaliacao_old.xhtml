@@ -7,7 +7,7 @@
       
 	<ui:composition template="layout.xhtml">
    		<ui:define name="corpo">
-		<h1 class="aw-page-title">Avaliação</h1>
+		<h1 class="aw-page-title">Votação</h1>
 		
 		<h:form id="frm">
 			<p:messages autoUpdate="false" />
@@ -21,12 +21,12 @@
 								
 									<p:outputLabel value="Codigo" for="codigo" />
 									<p:inputMask id="codigo" required="true" requiredMessage="Codigo é obrigatório"
-								value="#{candidatosManager.parceiroEdicao.parId}"
+								value="#{candidatosManager.candidatoEdicao.codigo}"
 								style="width: 70%" />
 								
 							<p:outputLabel value="Nome" for="nome" />
 							<p:inputText id="nome" required="true" requiredMessage="Nome é obrigatório"
-								value="#{candidatosManager.parceiroEdicao.parNomeRazaoSocial}" />
+								value="#{candidatosManager.candidatoEdicao.nome}" />
 								
 								
 						</p:panelGrid>
@@ -40,7 +40,7 @@
 									process="tabView @this" update="@form" />					
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right" >
-					<p:commandButton value="Novo" action="#{candidatosManager.novoParceiro}"
+					<p:commandButton value="Novo" action="#{candidatosManager.novoCandidato}"
 						process="@this" update="@form" />
 						
 					<p:commandButton value="Pesquisa" action="#{candidatosManager.novoCandidato}" />

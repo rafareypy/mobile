@@ -13,16 +13,16 @@
 
 			<p:toolbar>
 				<p:toolbarGroup align="right">
-					<p:commandButton value="Votacao Rapida" style="width: auto"
-						oncomplete="PF('novoCandidatoDialog').show()"
-						action="#{candidatosManager.novoCandidatoDialog}"
+					<p:commandButton value="Avaliacao Rapida" style="width: auto"
+						oncomplete="PF('avaliacaoDialog').show()"
+						action="#{candidatosManager.avaliacaoDialog}"
 						process="@this" >
-						<p:resetInput target="frm:novoCandidatoDialog" />
+						<p:resetInput target="frm:avaliacaoDialog" />
 					</p:commandButton>
 				
 				
 					<p:commandButton value="Novo Candidato" 
-						action="#{candidatosManager.novoCandidato}"  
+						action="#{candidatosManager.avaliacao}"  
 						process="@this"
 						/>
 				</p:toolbarGroup>
@@ -49,7 +49,7 @@
 				</f:facet>
 			</p:dataTable>
 
-			<p:dialog widgetVar="novoCandidatoDialog" id="novoCandidatoDialog"
+			<p:dialog widgetVar="avaliacaoDialog" id="avaliacaoDialog"
 				header="Novo Candidato" resizable="false" responsive="true">
 				
 				<h:panelGroup id="novoCandidatoPanel" layout="block" styleClass="ui-fluid">
@@ -57,21 +57,8 @@
 				
 					<p:panelGrid columns="2" layout="grid" styleClass="panelgrid-noborder"
 							columnClasses="ui-grid-col-4, ui-grid-col-8">
-						<p:outputLabel value="Nome" for="nome" />
-						<p:inputText id="nome" required="true"
-							value="#{candidatosManager.candidatoEdicao.nome}" />
-						
-						<p:outputLabel value="Codigo" for="codigo" />
-						<p:inputText id="codigo" required="true"
-							value="#{candidatosManager.candidatoEdicao.codigo}" />
 						
 						
-						<p:outputLabel/>
-						<p:commandButton value="Adicionar" process="novoCandidatoDialog"								
-								oncomplete="if (!args.validationFailed) PF('novoCandidatoDialog').hide()">
-							<p:collector value="#{candidatosManager.candidatoEdicao}"
-								addTo="#{candidatosManager.candidatos}" />
-						</p:commandButton>
 					</p:panelGrid>
 				</h:panelGroup>
 				
