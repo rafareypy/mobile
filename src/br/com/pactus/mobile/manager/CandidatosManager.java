@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.commons.core.tool.Console;
+import javax.commons.core.util.NumUtils;
 import javax.commons.core.util.ObjUtils;
 import javax.commons.persistence.PersistenceClause;
 import javax.faces.application.FacesMessage;
@@ -31,7 +32,17 @@ public class CandidatosManager implements Serializable{
       clause.andEquals("camId", 24);
       Parceiro p = new Parceiro();
       p.addClause(clause);
-      parceiros = SessionManager.search().findAllByClause(p).getResult();
+      List<Parceiro> parceirosAUX = SessionManager.search().findAllByClause(p).getResult();
+      
+      int i =0 ;
+      for (Parceiro parceiro: parceirosAUX){
+         i++;
+         if(NumUtils.isLessThan(i, 4)){
+            parceiros.add(parceiro);
+         }else{
+            return;
+         }
+      }
 
    }
 
