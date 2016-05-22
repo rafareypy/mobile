@@ -10,79 +10,67 @@
 		<h1 class="aw-page-title">Avaliação</h1>
 		
 		<h:form id="frm">
-			<p:messages autoUpdate="false" />
-
-			<div class="ui-fluid" >
-				<p:tabView style="magin-top: 10px" id="tabView" >
-					<p:tab title="Avalição">
-						<p:panelGrid columns="4" layout="grid" 
-								columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4"
-								styleClass="panelgrid-noborder">
-								
-									<p:outputLabel value="Codigo" for="codigo" />
-									<p:inputMask id="codigo" required="true" requiredMessage="Codigo é obrigatório"
-								value="#{candidatosManager.parceiroEdicao.parId}"
-								style="width: 70%" />
-								
-							<p:outputLabel value="Nome" for="nome" />
-							<p:inputText id="nome" value="#{candidatosManager.parceiroEdicao.parNomeRazaoSocial}" />
-								
-						</p:panelGrid>
-					</p:tab>
-				</p:tabView>			
-			</div>
-			
-			<p:toolbar>
-			
-				<p:toolbarGroup align="right" >
-					<p:commandButton value="Buscar" action="#{candidatosManager.buscarParceiro}"
-						process="tabView  @this" update="@form" />
+				<p:messages autoUpdate="false" />
+	
+				<div class="ui-fluid" >
+					<p:tabView style="magin-top: 10px" id="tabView" >
+						<p:tab title="Avalição">
+							<p:panelGrid columns="4" layout="grid" 
+									columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4"
+									styleClass="panelgrid-noborder">
+									
+										<p:outputLabel value="Codigo" for="codigo" />
+										<p:inputMask id="codigo" required="true" requiredMessage="Codigo é obrigatório"
+												value="#{candidatosManager.parceiroEdicao.parId}"
+												style="width: 70%" >											 
+										</p:inputMask>
+										
+									<p:outputLabel value="Nome" for="nome" />
+									<p:inputText id="nome" value="#{candidatosManager.parceiroEdicao.parNomeRazaoSocial}" />
+									
+							</p:panelGrid>
+						</p:tab>
+					</p:tabView>			
+				</div>
+				
+				<p:toolbar>
+				
+					<p:toolbarGroup align="right" >
+						<p:commandButton value="Buscar" action="#{candidatosManager.buscarParceiro}"
+							process="tabView  @this" update="@form" />
+							
+						<p:commandButton 
+							value="Foto" style="width: auto"
+							oncomplete="PF('listaCandidatosDialog').show()"
+							action="#{candidatosManager.listaCandidatosDialog}"
+							process="@this" >
+							<p:resetInput target="frm:listaCandidatosDialog" />						
+						</p:commandButton>
 						
-					<p:commandButton 
-						value="Pesquisa" style="width: auto"
-						oncomplete="PF('listaCandidatosDialog').show()"
-						action="#{candidatosManager.listaCandidatosDialog}"
-						process="@this" >
-						<p:resetInput target="frm:listaCandidatosDialog" />
-					</p:commandButton>
-					
-				</p:toolbarGroup>			
-			
-				<p:toolbarGroup>
-					<p:commandButton value="Salvar" action="#{candidatosManager.salvar}" 
-									process="@this" update="@form" />					
-				</p:toolbarGroup>
-
-			</p:toolbar>
-			
-			<p:dialog widgetVar="listaCandidatosDialog" id="listaCandidatosDialog" 
-					header="Busca Candidatos" resizable="false" responsive="true"  >
-					
-				<p:dataTable value="#{candidatosManager.parceiros}" var="parceiro"
-						selectionMode="single" selection="#{candidatosManager.parceiroEdicao}"
-						rowKey="#{parceiro.parId}" style="margin-top: 20px">
-						<p:column headerText="Codigo">
-							<h:outputText value="#{parceiro.parId}" />
-						</p:column>
-						<p:column headerText="Nome" priority="3">
-							<h:outputText value="#{parceiro.parNomeFantasia}" />
-						</p:column>
-						<p:column headerText="Responsavel" priority="6">
-							<h:outputText value="#{parceiro.parNomeRazaoSocial}" />
-						</p:column>
-		
-						<f:facet name="footer">
-							<p:commandButton icon="ui-icon-pencil" value="Editar" 
-								action="votacao?faces-redirect=true"
-							/>
-						</f:facet>
-					</p:dataTable>
-					
-					
-			 
-			</p:dialog>					
-					
-					
+					</p:toolbarGroup>			
+				
+					<p:toolbarGroup>
+						<p:commandButton value="Salvar" action="#{candidatosManager.salvar}" 
+										process="@this" update="@form" />					
+					</p:toolbarGroup>
+	
+				</p:toolbar>
+				
+				<p:dialog widgetVar="listaCandidatosDialog" id="listaCandidatosDialog" 
+						header="Obter foto" resizable="false" responsive="true"  >
+					<div class="ui-fluid">
+						<p:panelGrid columns="4" layout="grid"
+									columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4"
+									styleClass="panelgrid-noborder">
+								<p:photoCam widgetVar="pc" listener="#{photoCamView.oncapture}" update="photo" />
+						        <p:commandButton type="button" value="Capture" onclick="PF('pc').capture()"/>
+						        <p:outputPanel id="photo">
+						            <p:graphicImage name="demo/images/photocam/#{photoCamView.filename}.png" rendered="#{not empty photoCamView.filename}"/>
+						        </p:outputPanel>
+						</p:panelGrid>
+					</div>						
+				</p:dialog>					
+						
 			</h:form>
 						
    		</ui:define>
